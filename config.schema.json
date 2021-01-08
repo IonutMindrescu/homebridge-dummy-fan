@@ -1,23 +1,23 @@
 {
-  "pluginAlias": "DummyGarage",
+  "pluginAlias": "DummyFan",
   "pluginType": "accessory",
   "singular": false,
   "schema": {
-    "title": "Dummy Garage",
+    "title": "Dummy Fan",
     "type": "object",
     "properties": {
       "name": {
         "title": "Name",
         "type": "string",
         "required": true,
-        "default": "Dummy Garage",
-        "description": "Name of Garage to appear in Home app"
+        "default": "Dummy Fan",
+        "description": "Name of Fan to appear in Home app"
       },
-      "autoCloseDelay": {
-        "title": "Auto Close Delay",
+      "autoOffDelay": {
+        "title": "Auto Turn Off Delay",
         "type": "integer",
         "default": 0,
-        "description": "Number of seconds after opening door will automatically close. 0 to disable."
+        "description": "Number of seconds after fan will automatically turn off (0 to disable)"
       }
     }
   }

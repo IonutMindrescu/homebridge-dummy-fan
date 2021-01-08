@@ -12,8 +12,8 @@ class DummyFan {
 
 		//get config values
 		this.name = config['name'] || "Dummy Fan";
-		this.autoCloseDelay = config["autoOffDelay"] === undefined ? 0 : Number(config["autoOffDelay"]);
-		
+		this.autoOffDelay = config["autoOffDelay"] === undefined ? 0 : Number(config["autoOffDelay"]);
+
 		//persist storage
 		this.cacheDirectory = HomebridgeAPI.user.persistPath();
 		this.storage = require('node-persist');
@@ -25,7 +25,7 @@ class DummyFan {
 		this.lastOpened = new Date();
 		this.service = new Service.GarageDoorOpener(this.name, this.name);
 		this.setupFanService(this.service);
-		
+
 		this.informationService = new Service.AccessoryInformation();
 		this.informationService
 			.setCharacteristic(Characteristic.Manufacturer, 'github/IonutMindrescu')
@@ -42,7 +42,7 @@ setupFanService (service) {
 	this.log.debug("setupFanService");
 	this.log.debug("Cached State: " + this.cachedState);
 	
-	if((this.cachedState === undefined) || (this.cachedState === true)) {
+	if ((this.cachedState === undefined) || (this.cachedState === true)) {
 		this.log.debug("Using Saved Turned ON State");
 		this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.OPEN);
 	} else {
@@ -62,17 +62,16 @@ setupFanService (service) {
 				this.lastOpened = new Date();
 				this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.OPEN);
 				this.storage.setItem(this.name, true);
-				this.log.debug("autoCloseDelay = " + this.autoCloseDelay);
-				if (this.autoCloseDelay > 0) {
-					this.log("Closing in " + this.autoCloseDelay + " seconds.");
+				this.log.debug("autoOffDelay = " + this.autoOffDelay);
+				if (this.autoOffDelay > 0) {
+					this.log("Closing in " + this.autoOffDelay + " seconds.");
 					setTimeout(() => {
 						this.log("Auto Closing");
 						this.service.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
 						this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
 						this.storage.setItem(this.name, false);
-					}, this.autoCloseDelay * 1000);
+					}, this.autoOffDelay * 1000);
 				}
-				
 				callback();
 
 			} else if (value === Characteristic.TargetDoorState.CLOSED)  {
