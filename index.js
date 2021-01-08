@@ -4,14 +4,14 @@ module.exports = function(homebridge) {
 	Service = homebridge.hap.Service;
 	Characteristic = homebridge.hap.Characteristic;
 	HomebridgeAPI = homebridge;
-	homebridge.registerAccessory('homebridge-dummy-garage', 'DummyGarage', DummyGarage);
+	homebridge.registerAccessory('homebridge-dummy-garage', 'DummyFan', DummyFan);
 }
 
-class DummyGarage {
+class DummyFan {
 	constructor (log, config) {
 
 		//get config values
-		this.name = config['name'] || "Dummy Garage";
+		this.name = config['name'] || "Dummy Fan";
 		this.autoCloseDelay = config["autoCloseDelay"] === undefined ? 0 : Number(config["autoCloseDelay"]);
 		
 		//persist storage
@@ -24,13 +24,13 @@ class DummyGarage {
 		this.log = log;
 		this.lastOpened = new Date();
 		this.service = new Service.GarageDoorOpener(this.name, this.name);
-		this.setupGarageDoorOpenerService(this.service);
+		this.setupFanService(this.service);
 		
 		this.informationService = new Service.AccessoryInformation();
 		this.informationService
-			.setCharacteristic(Characteristic.Manufacturer, 'github/rasod')
-			.setCharacteristic(Characteristic.Model, 'Dummy Garage')
-			.setCharacteristic(Characteristic.FirmwareRevision, '1.2.2')
+			.setCharacteristic(Characteristic.Manufacturer, 'github/IonutMindrescu')
+			.setCharacteristic(Characteristic.Model, 'Dummy Fan')
+			.setCharacteristic(Characteristic.FirmwareRevision, '1.0.0')
 			.setCharacteristic(Characteristic.SerialNumber, this.name.replace(/\s/g, '').toUpperCase());
 }
 
@@ -38,15 +38,15 @@ getServices () {
 	return [this.informationService, this.service];
 }
 
-setupGarageDoorOpenerService (service) {
-	this.log.debug("setupGarageDoorOpenerService");
+setupFanService (service) {
+	this.log.debug("setupFanService");
 	this.log.debug("Cached State: " + this.cachedState);
 	
 	if((this.cachedState === undefined) || (this.cachedState === true)) {
-		this.log.debug("Using Saved OPEN State");
+		this.log.debug("Using Saved Turned ON State");
 		this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.OPEN);
 	} else {
-		this.log.debug("Using Default CLOSED State");
+		this.log.debug("Using Default Turned OFF State");
 		this.service.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
 		this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
 	}
@@ -74,7 +74,7 @@ setupGarageDoorOpenerService (service) {
 				}
 				
 				callback();
-				
+
 			} else if (value === Characteristic.TargetDoorState.CLOSED)  {
 				this.log("Closing: " + this.name)
 				this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);

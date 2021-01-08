@@ -1,22 +1,21 @@
 {
-  "name": "homebridge-dummy-garage",
+  "name": "homebridge-dummy-fan ",
   "version": "1.2.3",
-  "description": "Dummy Garage Opener for Homebridge",
+  "description": "Dummy Fan for Homebridge",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/rasod/homebridge-dummy-garage.git"
+    "url": "git://github.com/IonutMindrescu/homebridge-dummy-fan.git"
   },
   "bugs": {
-    "url": "https://github.com/rasod/homebridge-dummy-garage/issues"
+    "url": "https://github.com/IonutMindrescu/homebridge-dummy-fan/issues"
   },
   "keywords": [
     "homebridge-plugin",
     "homebridge",
-    "garage",
-    "garagedoor",
-    "dummy garage",
-    "carplay"
+    "dummy",
+    "fan",
+    "auto fan"
   ],
   "engines": {
     "node": ">=6.4.0",
