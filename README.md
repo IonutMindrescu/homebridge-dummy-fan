@@ -1,4 +1,4 @@
-# homebridge-dummy-garage
+# homebridge-dummy-fan
 [Homebridge](https://github.com/nfarina/homebridge) plugin to create a dummy HomeKit Fan accessory. Why? It's simple to create Automations to trigger some custom built accessories like Sonoff switches.
 
 # Installation

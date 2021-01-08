@@ -1,6 +1,6 @@
 {
-  "name": "homebridge-dummy-fan ",
-  "version": "1.2.3",
+  "name": "homebridge-dummy-fan",
+  "version": "1.0.1",
   "description": "Dummy Fan for Homebridge",
   "license": "MIT",
   "repository": {
@@ -15,7 +15,8 @@
     "homebridge",
     "dummy",
     "fan",
-    "auto fan"
+    "auto fan",
+    "dummy fan"
   ],
   "engines": {
     "node": ">=6.4.0",

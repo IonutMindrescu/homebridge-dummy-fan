@@ -4,7 +4,7 @@ module.exports = function(homebridge) {
 	Service = homebridge.hap.Service;
 	Characteristic = homebridge.hap.Characteristic;
 	HomebridgeAPI = homebridge;
-	homebridge.registerAccessory('homebridge-dummy-garage', 'DummyFan', DummyFan);
+	homebridge.registerAccessory('homebridge-dummy-fan', 'DummyFan', DummyFan);
 }
 
 class DummyFan {
@@ -12,7 +12,7 @@ class DummyFan {
 
 		//get config values
 		this.name = config['name'] || "Dummy Fan";
-		this.autoCloseDelay = config["autoCloseDelay"] === undefined ? 0 : Number(config["autoCloseDelay"]);
+		this.autoCloseDelay = config["autoOffDelay"] === undefined ? 0 : Number(config["autoOffDelay"]);
 		
 		//persist storage
 		this.cacheDirectory = HomebridgeAPI.user.persistPath();
