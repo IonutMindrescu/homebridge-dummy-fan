@@ -23,7 +23,7 @@ class DummyFan {
 		//initial setup
 		this.log = log;
 		this.lastOpened = new Date();
-		this.service = new Service.GarageDoorOpener(this.name, this.name);
+		this.service = new Service.Fan(this.name, this.name);
 		this.setupFanService(this.service);
 
 		this.informationService = new Service.AccessoryInformation();
