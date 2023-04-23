@@ -1,14 +1,14 @@
 {
-  "name": "homebridge-dummy-fan",
-  "version": "1.0.2",
-  "description": "Dummy Fan for Homebridge",
+  "name": "homebridge-dummy-fan-minmax",
+  "version": "1.0.0",
+  "description": "Dummy Fan with min, max and minStep for Homebridge",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/IonutMindrescu/homebridge-dummy-fan.git"
+    "url": "git://github.com/sinak/homebridge-dummy-fan.git"
   },
   "bugs": {
-    "url": "https://github.com/IonutMindrescu/homebridge-dummy-fan/issues"
+    "url": "https://github.com/sinak/homebridge-dummy-fan/issues"
   },
   "keywords": [
     "homebridge-plugin",
