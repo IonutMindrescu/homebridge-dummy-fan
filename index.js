@@ -34,12 +34,7 @@ class DummyFan {
 			.setCharacteristic(Characteristic.Manufacturer, 'github/IonutMindrescu')
 			.setCharacteristic(Characteristic.Model, 'Dummy Fan')
 			.setCharacteristic(Characteristic.FirmwareRevision, '1.0.0')
-			.setCharacteristic(Characteristic.SerialNumber, this.name.replace(/\s/g, '').toUpperCase())
-			.setProps({
-			    minValue: this.min,
-			    maxValue: this.max,
-			    minStep: this.minStep
-			  });
+			.setCharacteristic(Characteristic.SerialNumber, this.name.replace(/\s/g, '').toUpperCase());
 }
 
 getServices () {
@@ -58,6 +53,13 @@ setupFanService (service) {
 		this.service.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
 		this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
 	}
+	
+	service.getCharacteristic(Characteristic.RotationSpeed)
+		.setProps({
+		    minValue: this.min,
+		    maxValue: this.max,
+		    minStep: this.minStep
+		  });
 
 	service.getCharacteristic(Characteristic.TargetDoorState)
 		.on('get', (callback) => {
