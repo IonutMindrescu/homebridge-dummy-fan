@@ -13,6 +13,9 @@ class DummyFan {
 		//get config values
 		this.name = config['name'] || "Dummy Fan";
 		this.autoOffDelay = config["autoOffDelay"] === undefined ? 0 : Number(config["autoOffDelay"]);
+		this.min = config["min"] === undefined ? 0 : Number(config["min"]);
+		this.max = config["max"] === undefined ? 100 : Number(config["max"]);
+		this.minStep = config["minStep"] === undefined ? 1 : Number(config["minStep"]);
 
 		//persist storage
 		this.cacheDirectory = HomebridgeAPI.user.persistPath();
@@ -31,7 +34,12 @@ class DummyFan {
 			.setCharacteristic(Characteristic.Manufacturer, 'github/IonutMindrescu')
 			.setCharacteristic(Characteristic.Model, 'Dummy Fan')
 			.setCharacteristic(Characteristic.FirmwareRevision, '1.0.0')
-			.setCharacteristic(Characteristic.SerialNumber, this.name.replace(/\s/g, '').toUpperCase());
+			.setCharacteristic(Characteristic.SerialNumber, this.name.replace(/\s/g, '').toUpperCase())
+			.setProps({
+			    minValue: this.min,
+			    maxValue: this.max,
+			    minStep: this.minStep
+			  });
 }
 
 getServices () {
