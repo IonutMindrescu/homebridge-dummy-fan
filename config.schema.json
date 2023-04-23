@@ -13,11 +13,23 @@
         "default": "Dummy Fan",
         "description": "Name of Fan to appear in Home app"
       },
-      "autoOffDelay": {
-        "title": "Auto Turn Off Delay",
+      "min": {
+        "title": "Minimum Speed",
         "type": "integer",
         "default": 0,
-        "description": "Number of seconds after fan will automatically turn off (0 to disable)"
+        "description": "Minimum speed of the fan control (0 by default)"
+      },
+      "max": {
+        "title": "Maximum Speed",
+        "type": "integer",
+        "default": 100,
+        "description": "Maximum speed of the fan control (100 by default)"
+      },
+      "minStep": {
+        "title": "Minimum Step",
+        "type": "integer",
+        "default": 1,
+        "description": "The minimum step value (1 by default)"
       }
     }
   }
