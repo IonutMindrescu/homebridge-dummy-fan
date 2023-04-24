@@ -13,6 +13,9 @@ class DummyFan {
 		//get config values
 		this.name = config['name'] || "Dummy Fan";
 		this.autoOffDelay = config["autoOffDelay"] === undefined ? 0 : Number(config["autoOffDelay"]);
+		this.min = config["min"] === undefined ? 0 : Number(config["min"]);
+		this.max = config["max"] === undefined ? 100 : Number(config["max"]);
+		this.minStep = config["minStep"] === undefined ? 1 : Number(config["minStep"]);
 
 		//persist storage
 		this.cacheDirectory = HomebridgeAPI.user.persistPath();
@@ -50,6 +53,13 @@ setupFanService (service) {
 		this.service.setCharacteristic(Characteristic.TargetDoorState, Characteristic.TargetDoorState.CLOSED);
 		this.service.setCharacteristic(Characteristic.CurrentDoorState, Characteristic.CurrentDoorState.CLOSED);
 	}
+	
+	service.getCharacteristic(Characteristic.RotationSpeed)
+		.setProps({
+		    minValue: this.min,
+		    maxValue: this.max,
+		    minStep: this.minStep
+		  });
 
 	service.getCharacteristic(Characteristic.TargetDoorState)
 		.on('get', (callback) => {
